@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDb from './config/db.js';
-import userRoutes from './routes/auth.routes.js';
+import userRoutes from './routes/user.routes.js';
+import authRoutes from './routes/auth.routes.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
@@ -18,8 +19,8 @@ app.use(cors({
 }));
 
 
-app.use("/api/auth", userRoutes);
-
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 app.listen(post, () => {
     connectDb();

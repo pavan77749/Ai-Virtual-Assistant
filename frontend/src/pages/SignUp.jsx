@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUserAlt, FaLock, FaEnvelope } from 'react-icons/fa';
-import { MdOutlineSmartToy } from 'react-icons/md';
+import { BsRobot } from "react-icons/bs";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import axios from 'axios';
 
@@ -47,7 +47,7 @@ const SignUp = () => {
         <div className="p-8">
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center">
-              <MdOutlineSmartToy className="text-white text-3xl" />
+            <BsRobot className="text-white text-3xl" />
             </div>
           </div>
           
