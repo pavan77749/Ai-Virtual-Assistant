@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaUser, FaLock, FaRobot } from 'react-icons/fa';
 import { BsRobot } from "react-icons/bs";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import axios from 'axios';
+import { UserDataContext} from '../context/UserContext';
 
 
 const Login = () => {
@@ -12,8 +13,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const HOST_URL = import.meta.env.VITE_HOST_URL;
+  const { HOST_URL, setUserData, userData } =  useContext(UserDataContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ const Login = () => {
         email,
         password,
       }, {withCredentials: true});
-
+      setUserData(response.data);
       console.log("Login Success:", response.data);
     } catch (err) {
       if (err.response) {

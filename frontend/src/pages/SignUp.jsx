@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaUserAlt, FaLock, FaEnvelope } from 'react-icons/fa';
 import { BsRobot } from "react-icons/bs";
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 import axios from 'axios';
+import { UserDataContext } from '../context/UserContext';
 
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
+  const [name, setName] = useState('') ;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-
-  const HOST_URL = import.meta.env.VITE_HOST_URL;
-
+  const { HOST_URL, userData, setUserData  } =  useContext(UserDataContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -28,6 +27,7 @@ const SignUp = () => {
       email,
       password,
     }, {withCredentials: true});
+    setUserData(response.data);
     console.log("Sign Up Success:", response.data);
     navigate('/login');
   } catch (err) {
