@@ -20,9 +20,9 @@ export const signup = async (req, res) => {
         await newUser.save();
         const token = await generateToken(newUser._id);
         res.cookie('token', token, {
-            httpOnly: true,
-            sameSite: 'Strict',
-            maxAge: 24 * 60 * 60 * 1000, 
+          httpOnly: true,
+          sameSite: 'Strict',
+          maxAge: 24 * 60 * 60 * 1000,
         });
         res.status(201).json({ token, user: { id: newUser._id, name: newUser.name, email: newUser.email, assistantName: newUser.assistantName, assistantAvatar: newUser.assistantAvatar, history: newUser.history } });
     } catch (error) {
@@ -41,7 +41,13 @@ export const login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(400).json({ message: "Invalid credentials" });
         }   
-        res.status(200).json({ user: { id: user._id, name: user.name, email: user.email, assistantName: user.assistantName, assistantAvatar: user.assistantAvatar, history: user.history } });
+        const token = await generateToken(user._id);
+        res.cookie('token', token, {
+          httpOnly: true,
+          sameSite: 'Strict',
+          maxAge: 24 * 60 * 60 * 1000,
+        });
+        res.status(200).json({ user: {token, id: user._id, name: user.name, email: user.email, assistantName: user.assistantName, assistantAvatar: user.assistantAvatar, history: user.history } });
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });
     }

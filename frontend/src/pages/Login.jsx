@@ -23,7 +23,7 @@ const Login = () => {
       const response = await axios.post(`${HOST_URL}/api/auth/login`, {
         email,
         password,
-      });
+      }, {withCredentials: true});
 
       console.log("Login Success:", response.data);
     } catch (err) {

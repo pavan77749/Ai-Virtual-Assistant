@@ -27,7 +27,7 @@ const SignUp = () => {
       name,
       email,
       password,
-    });
+    }, {withCredentials: true});
     console.log("Sign Up Success:", response.data);
     navigate('/login');
   } catch (err) {
