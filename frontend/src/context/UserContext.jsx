@@ -5,6 +5,10 @@ const HOST_URL = import.meta.env.VITE_HOST_URL;
 
 function UserDataProvider({ children }) {
     const [userData, setUserData] = useState(null);
+    const [frontendImage, setFrontendImage] = useState(null);
+    const [backendImage, setBackendImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState(null);
+
     const handleCurrentUser = async() => {
         try {
             const response = await axios.get(`${HOST_URL}/api/user/me`, {
@@ -24,7 +28,7 @@ function UserDataProvider({ children }) {
     useEffect(() => {
         handleCurrentUser();
     }, []);
-    const value = { userData, setUserData, handleCurrentUser, HOST_URL };
+    const value = { userData, setUserData, handleCurrentUser, HOST_URL, frontendImage, setFrontendImage, backendImage, setBackendImage, selectedImage, setSelectedImage };
     return (
         <UserDataContext.Provider value={value}>
             {children}
