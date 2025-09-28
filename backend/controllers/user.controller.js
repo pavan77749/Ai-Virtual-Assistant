@@ -22,6 +22,7 @@ export const getUsers = async (req, res) => {
     }
 };
 
+
 export const updateAssistant = async (req, res) => {
     try {
         const { assistantName, imageUrl } = req.body;
