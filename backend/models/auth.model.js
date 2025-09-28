@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "AI Visual Assistant",
     },
-    assistantAvatar: {
+    assistantImage: {
         type: String,
     },
     history: [
